@@ -1,23 +1,36 @@
-import Constants from "expo-constants";
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { Platform } from "react-native";
+// @ts-ignore - The RN types aren't exposed directly on this import path, but Metro resolves it
+import { initializeAuth, getReactNativePersistence, getAuth } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getReactNativePersistence, initializeAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: Constants.expoConfig?.extra?.API_KEY,
-  authDomain: "spendwise-8ad4b.firebaseapp.com",
-  projectId: "spendwise-8ad4b",
-  storageBucket: Constants.expoConfig?.extra?.STORAGE_BUCKET,
-  messagingSenderId: "889374708996",
-  appId: Constants.expoConfig?.extra?.APP_ID,
-  measurementId: "G-6C233NWPZ7",
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+let app, auth: any;
 
-export const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage),
-});
+if (getApps().length === 0) {
+  // First run
+  app = initializeApp(firebaseConfig);
+  if (Platform.OS === "web") {
+    auth = getAuth(app);
+  } else {
+    auth = initializeAuth(app, {
+      persistence: getReactNativePersistence(AsyncStorage),
+    });
+  }
+} else {
+  // Hot reload
+  app = getApp();
+  auth = getAuth(app);
+}
 
+export { auth };
 export const firestore = getFirestore(app);

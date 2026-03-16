@@ -1,29 +1,8 @@
-import { colors } from "../constants/theme";
-import { Image, StyleSheet, View } from "react-native";
+import { Redirect } from "expo-router";
 
-const Index = () => {
-  return (
-    <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        resizeMode="contain"
-        source={require("../assets/images/logo.png")}
-      />
-    </View>
-  );
-};
-
-export default Index;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: colors.background,
-  },
-  logo: {
-    height: "20%",
-    aspectRatio: 1,
-  },
-});
+// This acts as the entry. The AuthProvider in _layout.tsx
+// will call router.replace() once auth state is resolved,
+// so this redirect just picks the guest default.
+export default function Index() {
+  return <Redirect href="/(auth)/Welcome" />;
+}

@@ -53,11 +53,12 @@ export default {
       typedRoutes: true,
     },
     extra: {
-      API_KEY: process.env.API_KEY,
-      APP_ID: process.env.APP_ID,
-      STORAGE_BUCKET: process.env.STORAGE_BUCKET,
-      CLOUD_NAME: process.env.CLOUD_NAME,
-      UPLOAD_PRESET: process.env.UPLOAD_PRESET,
+      FIREBASE_API_KEY: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+      FIREBASE_AUTH_DOMAIN: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+      FIREBASE_PROJECT_ID: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+      FIREBASE_STORAGE_BUCKET: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+      FIREBASE_MESSAGING_SENDER_ID: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+      FIREBASE_APP_ID: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
     },
   },
 };

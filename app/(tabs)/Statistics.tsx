@@ -189,11 +189,11 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     borderRadius: radius._12,
-    backgroundColor: "[rgba(0,0,0, 0.6)",
+    backgroundColor: "rgba(0,0,0, 0.6)",
   },
   header: {},
   noChart: {
-    backgroundColor: "[rgba(0,0,0, 0.6)",
+    backgroundColor: "rgba(0,0,0, 0.6)",
     height: verticalScale(210),
   },
   searchIcon: {
