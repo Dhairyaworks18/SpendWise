@@ -14,11 +14,16 @@ const firebaseConfig = {
   appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
 };
 
-let app, auth: any;
-
+let app;
 if (getApps().length === 0) {
-  // First run
   app = initializeApp(firebaseConfig);
+} else {
+  app = getApp();
+}
+
+// React Native expects AsyncStorage persistence for Firebase Auth manually
+let auth: any;
+try {
   if (Platform.OS === "web") {
     auth = getAuth(app);
   } else {
@@ -26,10 +31,15 @@ if (getApps().length === 0) {
       persistence: getReactNativePersistence(AsyncStorage),
     });
   }
-} else {
-  // Hot reload
-  app = getApp();
-  auth = getAuth(app);
+} catch (e: any) {
+  // If we're hot-reloading native fast-refresh, `initializeAuth` throws
+  // "auth/already-initialized". In that case, we can safely just fetch it.
+  if (e.code === "auth/already-initialized") {
+    auth = getAuth(app);
+  } else {
+    console.error("Firebase auth initialization error: ", e);
+    throw e;
+  }
 }
 
 export { auth };

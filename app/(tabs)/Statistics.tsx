@@ -17,7 +17,7 @@ import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { colors, radius, spacingX, spacingY } from "../../constants/theme";
 import SegmentedControl from "@react-native-segmented-control/segmented-control";
 
-const Statistics = () => {
+export default function Statistics() {
   const { user } = useAuth();
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -176,7 +176,7 @@ const Statistics = () => {
   );
 };
 
-export default Statistics;
+
 
 const styles = StyleSheet.create({
   chartContainer: {

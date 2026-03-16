@@ -14,7 +14,7 @@ import { limit, orderBy, where } from "firebase/firestore";
 import { colors, spacingX, spacingY } from "../../constants/theme";
 import { MagnifyingGlassIcon, PlusIcon } from "phosphor-react-native";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
-const Home = () => {
+export default function Home() {
   const router = useRouter();
 
   const { user } = useAuth();
@@ -81,7 +81,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+
 
 const styles = StyleSheet.create({
   container: {

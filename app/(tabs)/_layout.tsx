@@ -1,7 +1,7 @@
 import { Tabs } from "expo-router";
 import { CustomTabs } from "../../components";
 
-const _layout = () => {
+export default function _layout() {
   return (
     <Tabs tabBar={CustomTabs} screenOptions={{ headerShown: false }}>
       <Tabs.Screen name="index" />
@@ -10,6 +10,4 @@ const _layout = () => {
       <Tabs.Screen name="Profile" />
     </Tabs>
   );
-};
-
-export default _layout;
+}

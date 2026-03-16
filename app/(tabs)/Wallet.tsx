@@ -9,7 +9,7 @@ import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import { colors, radius, spacingX, spacingY } from "../../constants/theme";
 import { Loading, ScreenWrapper, Typo, WalletListItem } from "../../components";
 
-const Wallet = () => {
+export default function Wallet() {
   const router = useRouter();
 
   const { user } = useAuth();
@@ -74,7 +74,7 @@ const Wallet = () => {
   );
 };
 
-export default Wallet;
+
 
 const styles = StyleSheet.create({
   container: {
